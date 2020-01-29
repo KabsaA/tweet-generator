@@ -1,6 +1,7 @@
 from python_quote import random_python_quote
 from rearrange import rearrange
-
+from sentence import random_words
 
 #print(random_python_quote())
-print(rearrange("the cow jumped over the moon"))
+#print(rearrange("the cow jumped over the moon"))
+random_words()
