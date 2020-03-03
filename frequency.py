@@ -34,7 +34,7 @@ def sample(fileName):
     return random.choice(list(histogram(fileName).keys()))
 
 
-def words(fileName, sampleCount=1):
+def words1(fileName, sampleCount=1):
     hist = histogram(fileName)
 
     # number of (total, not unique, words)
@@ -54,9 +54,13 @@ def words(fileName, sampleCount=1):
 
 
 def sentence(fileName, word_count=9, sentenct_structure=True):
-    #returns sentence (not grammatically correct)
+    """
+    Return a weighted sampling of the original text.
+    Defaults to a sentence structure with capitalized first letter
+    and period at the end.
+    """
     phrase = ""
-    words = words(fileName, word_count)
+    words = words1(fileName, word_count)
     for word in words:
         phrase += word + " "
     phrase = phrase.strip()
@@ -66,9 +70,25 @@ def sentence(fileName, word_count=9, sentenct_structure=True):
     return phrase
 
 
+def test_weight(fileName, sampleSize):
+    hat_count = 0
+    coat_count = 0
+    shirt_count = 0
+
+    words_sample = words1(fileName, sampleSize)
+    for ws in words_sample:
+        if str(ws) == 'hat':
+            hat_count += 1
+        if str(ws) == 'coat':
+            coat_count += 1
+        if str(ws) == 'shirt':
+            shirt_count += 1
+    print(hat_count, ' ', coat_count, ' ', shirt_count)
+
 
 if __name__ == '__main__':
     # print(unique_words(str(sys.argv[1])))
     print(frequency(str(sys.argv[1]), str(sys.argv[2])))
     print(sample(str(sys.argv[1])))
-    print(words(str(sys.argv[1])))
+    print(words1(str(sys.argv[1])))
+    test_weight(str(sys.argv[1]), 200000)

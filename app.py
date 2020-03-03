@@ -1,5 +1,5 @@
 from flask import Flask
-from frequency import words, sentence
+from frequency import words1, sentence
 
 app = Flask(__name__)
 
