@@ -66,22 +66,6 @@ def sentence(fileName, word_count=9, sentenct_structure=True):
     return phrase
 
 
-def test_weight(fileName, sampleSize):
-    hat_count = 0
-    coat_count = 0
-    shirt_count = 0
-
-    words_sample = words1(fileName, sampleSize)
-    for ws in words_sample:
-        if str(ws) == 'the':
-            hat_count += 1
-        if str(ws) == 'wise':
-            coat_count += 1
-        if str(ws) == 'man':
-            shirt_count += 1
-    print(the_count, ' ', wise_count, ' ', man_count)
-
-
 if __name__ == '__main__':
     # print(unique_words(str(sys.argv[1])))
     print(frequency(str(sys.argv[1]), str(sys.argv[2])))
