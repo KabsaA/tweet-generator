@@ -2,14 +2,14 @@
 import random
 from random import randrange
 
-sequence = [i for i in range(3,10)]
+sequence = input("Enter a number of words:")
 selection = random.choice(sequence)
 
 
 def dictionary():
     with open("/usr/share/dict/words", 'r') as dictionary:
         words = dictionary.read().split()
-    return words
+    print(words)
 
 
 def random_words(amt=selection):
@@ -17,4 +17,5 @@ def random_words(amt=selection):
     for _ in range(int(selection)):
         word = randrange(len(words))
         sentence = words[word]
-        print(sentence, end=' ')
+        print(sentence)
+        #print(sentence, end=' ')

@@ -9,4 +9,4 @@ def rearrange(sentence):
             random_list = random.randint(0, len(words) - 1)
             random_sentence.append(words[random_list])
             words.remove(words[random_list])
-    return random_sentence
+    return(random_sentence)
