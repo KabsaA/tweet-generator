@@ -54,11 +54,7 @@ def words1(fileName, sampleCount=1):
 
 
 def sentence(fileName, word_count=9, sentenct_structure=True):
-    """
-    Return a weighted sampling of the original text.
-    Defaults to a sentence structure with capitalized first letter
-    and period at the end.
-    """
+    """weighted sampling"""
     phrase = ""
     words = words1(fileName, word_count)
     for word in words:
@@ -77,13 +73,13 @@ def test_weight(fileName, sampleSize):
 
     words_sample = words1(fileName, sampleSize)
     for ws in words_sample:
-        if str(ws) == 'hat':
+        if str(ws) == 'the':
             hat_count += 1
-        if str(ws) == 'coat':
+        if str(ws) == 'wise':
             coat_count += 1
-        if str(ws) == 'shirt':
+        if str(ws) == 'man':
             shirt_count += 1
-    print(hat_count, ' ', coat_count, ' ', shirt_count)
+    print(the_count, ' ', wise_count, ' ', man_count)
 
 
 if __name__ == '__main__':
