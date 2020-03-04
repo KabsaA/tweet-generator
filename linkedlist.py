@@ -1,0 +1,148 @@
+class Node(object):
+
+    def __init__(self, data):
+        """Initialize this node with the given data."""
+        self.data = data
+        self.next = None
+
+    def __repr__(self):
+        """Return a string representation of this node."""
+        return 'Node({!r})'.format(self.data)
+
+
+class LinkedList(object):
+
+    def __init__(self, items=None):
+        """Initialize this linked list and append the given items, if any."""
+        self.head = None  # First node
+        self.tail = None  # Last node
+        # Append given items
+        if items is not None:
+            for item in items:
+                self.append(item)
+
+    def __str__(self):
+        """Return a formatted string representation of this linked list."""
+        items = ['({!r})'.format(item) for item in self.items()]
+        return '[{}]'.format(' -> '.join(items))
+
+    def __repr__(self):
+        """Return a string representation of this linked list."""
+        return 'LinkedList({!r})'.format(self.items())
+
+    def items(self):
+        """Return a list (dynamic array) of all items in this linked list.
+        Best and worst case running time: O(n) for n items in the list (length)
+        because we always need to loop through all n nodes to get each item."""
+        items = []  # O(1) time to create empty list
+        # Start at head node
+        node = self.head  # O(1) time to assign new variable
+        # Loop until node is None, which is one node too far past tail
+        while node is not None:  # Always n iterations because no early return
+            items.append(node.data)  # O(1) time (on average) to append to list
+            # Skip to next node to advance forward in linked list
+            node = node.next  # O(1) time to reassign variable
+        # Now list contains items from all nodes
+        return items  # O(1) time to return list
+
+    def is_empty(self):
+        """Return a boolean indicating whether this linked list is empty."""
+        return self.head is None
+
+    def length(self):
+        """Return the length of this linked list by traversing its nodes.
+        TODO: Running time: O(n) b/c always need to loop through all nodes"""
+        # TODO: Loop through all nodes and count one for each
+        length = 0  # O(1) time to assign new variable
+        node = self.head  # O(1) time to assign new variable
+        # Loop until node is None, which is one node too far past tail
+        while node is not None:  # Always n iterations because no early return
+            length += 1  # O(1) time to modify variable
+            # Skip to next node to advance forward in linked list
+            node = node.next  # O(1) time to reassign variable
+        return length  # O(1) time to return
+
+    def append(self, item):
+        """Insert the given item at the tail of this linked list.
+        TODO: Running time: O(5), only five actions."""
+        # TODO: Create new node to hold given item
+        node = Node(item)  # O(2) time to init node, assign new variable
+        # TODO: Append node after tail, if it exists
+        if self.tail is not None:  # O(1) time for comparison
+            self.tail.next = node  # O(1) time to assign variable
+        else:  # first item in list
+            self.head = node  # O(1) time to assign variable
+        self.tail = node  # O(1) time to assign variable
+
+    def prepend(self, item):
+        """Insert the given item at the head of this linked list.
+        TODO: Running time: O(5), only five actions"""
+        # TODO: Create new node to hold given item
+        node = Node(item)  # O(2) time to init node, assign new variable
+        # TODO: Prepend node before head, if it exists
+        if self.head is not None:  # O(1) time for comparison
+            node.next = self.head  # O(1) time to assign variable
+        else:
+            self.tail = node  # O(1) time to assign variable
+        self.head = node  # O(1) time to assign variable
+
+    def find(self, quality):
+        """Return an item from this linked list satisfying the given quality.
+        TODO: Best case running time: O(3) List is empty:
+            O(1) to assign variable
+            O(1) to check node is not None (false)
+            O(1) to return None
+        TODO: Worst case running time: O(n) Item not found:
+            Must loop through all n nodes to confirm item is not there."""
+        # TODO: Loop through all nodes to find item where quality(item) is True
+        node = self.head  # O(1) time to assign variable
+        while node is not None:  # Up to n iterations
+            if quality(node.data):  # O(1) time for comparison
+                return node.data  # O(1) time to return
+            # Skip to next node to advance forward in linked list
+            node = node.next  # O(1) time to reassign variable
+        return None  # Not in list, O(1) time to return
+
+    def delete(self, item):
+        """Delete the given item from this linked list, or raise ValueError.
+        TODO: Best case running time: O(2) List is empty:
+            O(1) to check head is not None (false)
+            O(1) to raise error
+        TODO: Worst case running time: O(n) Item is last:
+            Loop through all nodes, then reassign tail and previous_node.next
+            """
+        if self.head is not None:  # O(1) time for comparison
+            previous_node = None
+            node = self.head
+            while node is not None:  # Up to n iterations
+                if node.data == item:
+                    if previous_node is not None:
+                        previous_node.next = node.next
+                    else:
+                        self.head = node.next
+                    if node.next is None:  # last item
+                        self.tail = previous_node
+                    return
+                # Skip to next node to advance forward in linked list
+                previous_node = node  # O(1) time to reassign variable
+                node = node.next  # O(1) time to reassign variable
+        raise ValueError('Item not found: {}'.format(item))  # O(1) error
+        # TODO:Loop through all nodes to find one whose data matches given item
+        # TODO: Update previous node to skip around node with matching data
+        # TODO: Otherwise raise error to tell user that delete has failed
+        # Hint: raise ValueError('Item not found: {}'.format(item))
+
+    def replace(self, item, new_item):
+        """Replace item with new_item."""
+        node = self.head  # O(1) time to assign variable
+        while node is not None:  # Up to n iterations
+            if item == node.data:  # O(1) time for comparison
+                node.data = new_item  # O(1) time to assign variable
+                return
+            # Skip to next node to advance forward in linked list
+            node = node.next  # O(1) time to reassign variable
+        raise ValueError('Item not found: {}'.format(item))  # O(1) error
+
+
+if __name__ == '__main__':
+    test_linked_list()
