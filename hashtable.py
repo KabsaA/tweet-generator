@@ -1,7 +1,5 @@
-#!python
 
 from linkedlist import LinkedList, Node
-
 
 class HashTable(object):
 
@@ -185,4 +183,4 @@ if __name__ == '__main__':
     ht.get('I') == 1
     ht.get('V') == 5
     ht.get('X') == 10
-    ht.length() == 3 
+    ht.length() == 3
